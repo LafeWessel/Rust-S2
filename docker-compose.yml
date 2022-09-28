@@ -1,0 +1,9 @@
+version: '2.4'
+
+services:
+  rust:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/code:rw
