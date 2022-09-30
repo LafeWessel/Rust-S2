@@ -19,5 +19,13 @@ WORKDIR /s2/s2geometry/build
 RUN cmake -DCMAKE_CXX_STANDARD=17 -DCMAKE_PREFIX_PATH=/absl -DWITH_PYTHON=OFF -DCMAKE_INSTALL_PREFIX=/s2/bin ..
 RUN make install
 
+# install Rust
+RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+
+
+# install bindgen dependencies
+RUN apt-get install -y llvm-dev libclang-dev clang
+ENV PATH="/root/.cargo/bin:${PATH}"
+
 WORKDIR /code
 CMD ["/bin/bash"]
