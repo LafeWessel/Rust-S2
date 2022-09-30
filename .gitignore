@@ -1,0 +1,3 @@
+# ignore generated Cargo files
+s2-rust/target/**
+
