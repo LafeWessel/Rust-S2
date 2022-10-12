@@ -53,13 +53,10 @@ fn main()-> miette::Result<()> {
     let path = std::path::PathBuf::from("/s2/s2geometry/src/s2"); // include path
     let path4 = std::path::PathBuf::from("/s2/s2geometry/src"); // include path
     let path5 = std::path::PathBuf::from("/abseil/abseil-cpp"); // include path
-    let path1 = std::path::PathBuf::from("/abseil/abseil-cpp/absl/base"); // include path
-    let path2 = std::path::PathBuf::from("/abseil/abseil-cpp/absl/algorithm"); // include path
-    let path3 = std::path::PathBuf::from("/abseil/abseil-cpp/absl/cleanup"); // include path
-    let mut b = autocxx_build::Builder::new("src/main.rs", &[&path, &path2, &path3, &path1, &path4, &path5]).build()?;
+    let mut b = autocxx_build::Builder::new("src/main.rs", &[&path, &path4, &path5]).extra_clang_args(&["-std=c++17"]).build()?;
         // .extra_clang_args(&["-std=c++17"])
         // .expect_build();
-    b.flag_if_supported("-std=c++14")
+    b.flag_if_supported("-std=c++17")
         .compile("s2geometry-rust"); // arbitrary library name, pick anything
     println!("cargo:rerun-if-changed=src/main.rs");
     // Add instructions to link to any C++ libraries you need.
